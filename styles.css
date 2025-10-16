@@ -234,26 +234,94 @@ a:hover {
     align-items: center;
 }
 
-.hero-placeholder {
-    width: 400px;
-    height: 300px;
-    background: linear-gradient(135deg, var(--dk-orange) 0%, var(--dk-black) 100%);
-    border-radius: 16px;
+.hero-logo-container {
+    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+    align-items: center;
+    padding: 2rem;
 }
 
-.placeholder-content h3 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+.hero-logo {
+    max-width: 400px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(255, 107, 53, 0.3));
+    transition: all 0.3s ease;
+    /* Comprehensive all-sides edge blending with multiple gradient layers */
+    mask: 
+        /* Radial fade from center outward */
+        radial-gradient(ellipse 85% 80% at center, black 35%, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.8) 65%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0.25) 85%, transparent 95%),
+        /* Top edge fade */
+        linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%),
+        /* Bottom edge fade */
+        linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%),
+        /* Left edge fade */
+        linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%),
+        /* Right edge fade */
+        linear-gradient(to left, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%);
+    -webkit-mask: 
+        radial-gradient(ellipse 85% 80% at center, black 35%, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.8) 65%, rgba(0,0,0,0.5) 75%, rgba(0,0,0,0.25) 85%, transparent 95%),
+        linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%),
+        linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%),
+        linear-gradient(to right, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%),
+        linear-gradient(to left, transparent 0%, rgba(0,0,0,0.3) 10%, rgba(0,0,0,0.7) 25%, black 40%, black 100%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
 }
 
-.placeholder-content p {
-    color: rgba(255, 255, 255, 0.8);
+.hero-logo:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 25px 50px rgba(255, 107, 53, 0.4));
+}
+
+/* Enhanced all-sides background glow for seamless blending */
+.hero-logo-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160%;
+    height: 160%;
+    background: 
+        /* Central glow */
+        radial-gradient(ellipse 50% 40% at center, rgba(255, 107, 53, 0.12) 0%, transparent 70%),
+        /* Extended outer glow */
+        radial-gradient(ellipse 80% 70% at center, rgba(255, 107, 53, 0.06) 0%, transparent 80%),
+        /* Background transition layer */
+        radial-gradient(ellipse 100% 90% at center, rgba(10, 10, 10, 0.4) 0%, rgba(10, 10, 10, 0.7) 60%, #0a0a0a 85%);
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(3px);
+}
+
+/* Comprehensive edge transition layer */
+.hero-logo-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130%;
+    height: 130%;
+    background: 
+        /* Top fade */
+        linear-gradient(to bottom, #0a0a0a 0%, rgba(10, 10, 10, 0.8) 15%, transparent 35%),
+        /* Bottom fade */
+        linear-gradient(to top, #0a0a0a 0%, rgba(10, 10, 10, 0.8) 15%, transparent 35%),
+        /* Left fade */
+        linear-gradient(to right, #0a0a0a 0%, rgba(10, 10, 10, 0.8) 15%, transparent 35%),
+        /* Right fade */
+        linear-gradient(to left, #0a0a0a 0%, rgba(10, 10, 10, 0.8) 15%, transparent 35%),
+        /* Corner fades */
+        radial-gradient(ellipse at top left, #0a0a0a 0%, rgba(10, 10, 10, 0.6) 20%, transparent 40%),
+        radial-gradient(ellipse at top right, #0a0a0a 0%, rgba(10, 10, 10, 0.6) 20%, transparent 40%),
+        radial-gradient(ellipse at bottom left, #0a0a0a 0%, rgba(10, 10, 10, 0.6) 20%, transparent 40%),
+        radial-gradient(ellipse at bottom right, #0a0a0a 0%, rgba(10, 10, 10, 0.6) 20%, transparent 40%);
+    z-index: -1;
+    border-radius: 50%;
 }
 
 /* Section Headers */
@@ -709,9 +777,9 @@ a:hover {
         flex-wrap: wrap;
     }
 
-    .hero-placeholder {
-        width: 300px;
-        height: 200px;
+    .hero-logo {
+        max-width: 300px;
+        max-height: 300px;
     }
 
     .about-content {
@@ -769,13 +837,9 @@ a:hover {
         padding: 1.5rem;
     }
 
-    .hero-placeholder {
-        width: 250px;
-        height: 180px;
-    }
-
-    .placeholder-content h3 {
-        font-size: 1.5rem;
+    .hero-logo {
+        max-width: 250px;
+        max-height: 250px;
     }
 }
 
