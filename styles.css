@@ -1334,3 +1334,33 @@ section {
         font-size: 0.85rem;
     }
 }
+
+/* Google Play Store Links */
+.service-card a[href*="play.google.com"] {
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin: 0 auto;
+}
+
+.service-card a[href*="play.google.com"]:hover {
+    color: var(--dk-orange) !important;
+    background: rgba(255, 107, 53, 0.1);
+    text-decoration: none !important;
+    transform: translateY(-1px);
+}
+
+/* Mobile optimization for Play Store links */
+@media screen and (max-width: 768px) {
+    .service-card a[href*="play.google.com"] {
+        font-size: 0.8rem !important;
+        padding: 0.4rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .service-card a[href*="play.google.com"] {
+        font-size: 0.75rem !important;
+        padding: 0.3rem;
+    }
+}
