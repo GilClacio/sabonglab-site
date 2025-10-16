@@ -1025,20 +1025,38 @@ a:hover {
         margin-bottom: 1.5rem;
     }
 
-    .contact-form h3 {
+    .service-card h3 {
         font-size: 1.2rem;
         margin-bottom: 0.8rem;
     }
 
-    .contact-form p {
+    .service-card p {
         font-size: 0.85rem;
         line-height: 1.5;
+        margin-bottom: 1rem;
     }
 
     .contact-form a.btn-primary {
         padding: 14px 16px !important;
         font-size: 0.95rem !important;
         margin-bottom: 0.8rem;
+    }
+
+    /* Service card button optimization for small screens */
+    .service-card .btn-primary {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 16px 8px !important;
+        font-size: 0.85rem !important;
+        line-height: 1.3;
+        margin-top: 1rem;
+        word-wrap: break-word;
+        hyphens: auto;
+        text-align: center;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Enhanced small screen typography */
@@ -1128,9 +1146,13 @@ a:hover {
 
     .service-card .btn-primary {
         width: 100%;
-        max-width: 200px;
-        padding: 12px 20px;
+        max-width: none;
+        padding: 14px 20px;
         font-size: 1rem;
+        margin-top: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .services-grid {
