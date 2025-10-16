@@ -333,3 +333,93 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 */
+
+// Floating Share Button Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const shareButton = document.getElementById('shareButton');
+    const shareMenu = document.getElementById('shareMenu');
+    const shareIcon = shareButton?.querySelector('.share-icon');
+    const nativeShare = document.getElementById('nativeShare');
+    const copyLink = document.getElementById('copyLink');
+
+    if (shareButton && shareMenu && shareIcon) {
+        // Toggle share menu
+        shareIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            shareMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!shareButton.contains(e.target)) {
+                shareMenu.classList.remove('active');
+            }
+        });
+
+        // Native Web Share API (for mobile browsers that support it)
+        if (nativeShare && navigator.share) {
+            nativeShare.addEventListener('click', function(e) {
+                e.preventDefault();
+                navigator.share({
+                    title: 'sabongLAB - Essential Mobile Apps for Sabungeros',
+                    text: 'Check out sabongLAB - Mobile apps for sabong enthusiasts! 🐓',
+                    url: window.location.href
+                }).then(() => {
+                    shareMenu.classList.remove('active');
+                }).catch((error) => {
+                    console.log('Error sharing:', error);
+                });
+            });
+        } else if (nativeShare) {
+            // Hide native share option if not supported
+            nativeShare.style.display = 'none';
+        }
+
+        // Copy link functionality
+        if (copyLink) {
+            copyLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Create temporary input element
+                const tempInput = document.createElement('input');
+                tempInput.value = window.location.href;
+                document.body.appendChild(tempInput);
+                
+                // Select and copy the text
+                tempInput.select();
+                tempInput.setSelectionRange(0, 99999); // For mobile devices
+                
+                try {
+                    document.execCommand('copy');
+                    
+                    // Visual feedback
+                    const originalText = copyLink.querySelector('span:last-child').textContent;
+                    copyLink.querySelector('span:last-child').textContent = 'Copied!';
+                    copyLink.style.background = 'rgba(34, 197, 94, 0.2)';
+                    
+                    setTimeout(() => {
+                        copyLink.querySelector('span:last-child').textContent = originalText;
+                        copyLink.style.background = '';
+                    }, 2000);
+                    
+                } catch (err) {
+                    console.error('Failed to copy link:', err);
+                    // Fallback: show link in alert
+                    alert('Copy this link: ' + window.location.href);
+                }
+                
+                document.body.removeChild(tempInput);
+                shareMenu.classList.remove('active');
+            });
+        }
+
+        // Close menu after clicking share options (except copy link)
+        shareMenu.addEventListener('click', function(e) {
+            if (e.target.closest('.share-option') && !e.target.closest('#copyLink') && !e.target.closest('#nativeShare')) {
+                setTimeout(() => {
+                    shareMenu.classList.remove('active');
+                }, 100);
+            }
+        });
+    }
+});
