@@ -112,6 +112,13 @@ a:hover {
     transform: translateY(-2px);
 }
 
+/* Contact Form Mailto Buttons */
+.contact-form a.btn-primary:hover {
+    background: var(--dk-orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
 /* Navigation */
 .navbar {
     position: fixed;
